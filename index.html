@@ -17,19 +17,41 @@
       <canvas id="bergen_processing_canvas" width="320" height="176">
       </canvas>
     </div>
-    <div id="controls">
-      <ul>controls
-        <li><a href="#" onclick="play_pause('bergen_video');">Play / Pause</a></li>
-        <li><a href="#" onclick="stop('bergen_video');">Stop</a></li>
-        <li><a href="#" onclick="volUp('bergen_video');">Volume Up</a></li>
-        <li><a href="#" onclick="volDown('bergen_video');">Volume Down</a></li>
-        <li><a href="#" onclick="mute('bergen_video');">Mute</a></li>
-        <li><a href="#" onclick="showFilter();">Filter Editor</a></li>
-      </ul>
-    </div>
-    <div id="filter" style="display:none">
-      <form name="filter_form">
-        <textarea id="filter_text" name="filter_text" wrap="off">
+    <div id="workbench">
+      <div id="controls">
+        <p align="center">
+          <!-- Marking and Sync 
+          <a href="#" onclick="markIn();"><img src="icons/mark-in.png"></a>
+          <a href="#" onclick="playheadSync();"><img src="icons/playhead.png"></a>
+          <a href="#" onclick="markOut();"><img src="icons/mark-out.png"></a> -->
+          
+          <!-- A Big Play/Pause Button -->
+          <a href="#" onclick="play_pause('bergen_video');"><img id="play_button" src="icons/play.png"></a>
+          <a href="#" onclick="play_pause('bergen_video');"><img id="pause_button" src="icons/pause.png" style="display:none"></a>
+        
+          <!-- Mode Switches 
+          <a href="#" onclick="showEditor();"><img src="icons/edit.png"></a>
+          <a href="#" onclick="showClips();"><img src="icons/clips.png"></a> -->
+          <a href="#" onclick="showFilter();"><img src="icons/filter.png"></a>
+          
+          <br />
+          <!-- The Volume Row 
+          <a href="#" onclick="volUp('bergen_video');"><img src="icons/volume-up.png"></a>
+          <a href="#" onclick="volDown('bergen_video');"><img src="icons/volume-down.png"></a> -->
+          <a href="#" onclick="mute('bergen_video');"><img src="icons/muted.png"></a>
+        
+
+        </p>
+      </div>
+      <div id="meta">
+        <p align="center">
+          <!-- <a href="#" onclick="showCredits();"><img src="http://papyromancer.net/favicon.png" width="48px" height="48px"></a> -->
+          
+        </p>
+      </div>
+      <div id="filter" style="display:none">
+        <form name="filter_form">
+          <textarea id="filter_text" name="filter_text" wrap="off">
 Bolinhas bolinhas;
 Explosions explosions;
 
@@ -384,11 +406,12 @@ class Explosions extends ParticleSystem {
                                             
         }
 
-        </textarea>
-        <button id="filter_button" type="button" onclick="applyFilter();">Apply Filter<button>
-      </form>
+          </textarea>
+          <button id="filter_button" type="button" onclick="applyFilter();">Apply Filter<button>
+        </form>
+      </div>
     </div>
-    <div id="content">
+    <div id="help" style="display:none">
       <ul>Load a video url:
       </ul>
       <ul>Load a live stream:
@@ -403,7 +426,11 @@ class Explosions extends ParticleSystem {
         <li><a href="http://lightcorp.net/garage/media/">Garage Floor</a></li>
         <li><a href="http://lightcorp.net:8000/">Ogg Streams</a></li>
       </ul>
-      <p><a href="http://github.com/ogv/ogv.github.com">Fork on GitHub</a></p>
+    </div>
+    <div id="credits" style="display:none">
+      <div id="fork">
+        <p><a href="http://github.com/ogv/ogv.github.com">Fork on GitHub</a></p>
+      </div>
     </div>
     
     <!-- <script type="text/javascript" charset="utf-8" src="http://drop.io/openvideo_garage/remote_chat_bar.js?chat_password=e1kab9jldn"></script> -->

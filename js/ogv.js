@@ -11,26 +11,15 @@ function play_pause(id) {
     var time = video.currentTime
     video.currentTime = time;
     video.play();
+    setStyleById("play_button", "display", "none");
+    setStyleById("pause_button", "display", "inline");
   }
   else {
     video.pause();
+    setStyleById("pause_button", "display", "none");
+    setStyleById("play_button", "display", "inline");
   }
 };
-
-// Pause a playing video
-// or
-// Play a paused video
-function pause(video) {
-  var vid = document.getElementById(video);
-  vid.pause();
-}
-
-// Stop a video, return to beginning or poster
-function stop(video) {
-  var vid = document.getElementById(video);
-  vid.pause();
-  vid.currentTime = 0;
-}
 
 function volUp(video) {
   var vid = document.getElementById(video);
@@ -66,13 +55,13 @@ function mute(video) {
 }
 
 function showFilter() {
-  setStyleById("content", "display", "none");
+  setStyleById("workbench", "width", "75%");
   setStyleById("filter", "display", "inline");
 }
 
 function applyFilter() {
+  setStyleById("workbench", "width", "25%");
   setStyleById("filter", "display", "none");
-  setStyleById("content", "display", "inline");
   var script = document.filter_form.filter_text.value;
 	var canvas = document.getElementById("bergen_processing_canvas");
 	Processing(canvas, script);

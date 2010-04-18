@@ -34,10 +34,10 @@ a:active {
 }
 h1#title {
   font-family: "Orbitron Black", Helvetica, Arial, sans-serif;
-  font-size:64px;
+  font-size: 64px%;
   position: fixed;
-  bottom: 10px;
-  left: 40px;
+  bottom: 5%;
+  left: 5%;
   color:rgba(255,255,255,.2);
 }
 h1#slug {
@@ -47,14 +47,14 @@ h1#slug {
   left: 112px;
   display: none;
 }
-#content {
+#workbench {
   height: 100%;
+  width: 25%
   background: rgba(255,255,255,.2);
   -moz-border-radius:8px;
-  width: 192px;
   font-size: 20px;
   overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-x: auto;
   position: fixed;
   top: 0px;
   right: 0px;
@@ -75,16 +75,36 @@ canvas#bergen_processing_canvas {
   left: 0px;
   height: 100%;
 }
-#controls,
-#filter {
+#workbench img {
+  border:none;
+  margin: 0px;
+  padding: 0px;
+  align: center;
+}
+#workbench,
+#controls {
+  position: fixed;
   background: rgba(255,255,255,.2);
   padding:0px;
   margin:8px;
-  width: 128px;
   -moz-border-radius:8px;
   color: black;
   font-size: 16px;
   z-index:1;
+}
+#workbench {
+  width: 176px;
+}
+#controls {
+  width: 128px;
+  top: 8px;
+  right: 32px;
+}
+#meta {
+  position: fixed;
+  width: 64px;
+  bottom: 8px;
+  right: 8px;
 }
 p.note {
   color:red;
@@ -93,7 +113,7 @@ p.note {
 }
 #filter {
   position: fixed;
-  left: 256px;
+  right: 0px;
   width: 512px;
   height: 80%;
   top: 8px;
@@ -101,11 +121,11 @@ p.note {
 textarea#filter_text {
   color:black;
   background: rgba(255,255,255,.2);
-  height: 60%;
+  height: 80%;
   position: fixed;
-  width: 480px;
-  top: 24px;
-  left: 280px;
+  width: 55%;
+  top: 10%;
+  right: 20%;
   overflow:scroll;
 }
 button#filter_button {
@@ -114,8 +134,8 @@ button#filter_button {
   color:green;
   background: rgba(255,255,255,.3);
   position: fixed;
-  width: 128px;
+  width: 10%;
   height: 64px;
-  top:68%;
-  left: 632px;
+  bottom: 5%;
+  right: 5%;
 }
