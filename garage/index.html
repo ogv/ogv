@@ -30,59 +30,54 @@
     <div id="filter" style="display:none">
       <form name="filter_form">
         <textarea id="filter_text" name="filter_text" wrap="off">
- 
-        Bolinhas bolinhas;
-        Explosions explosions;
-         
-        int ballslaunched = 0;
-        int ballsdestroyed = 0;
-         
-        int frameCount=1;
-         
-        PFont font;
-        void setup() {
-            size(400, 300);
-            //  smooth();
-              font = loadFont("Tahoma"); 
-                textFont(font, 32);
-                  bolinhas = new Bolinhas();
-                    explosions = new Explosions();
-                      frameRate(3);
-                        rectMode(CORNERS);
-                          
-                          
-        }
- 
- 
- 
-void draw() {
-    //background(60,60,120);
-    //background(51);
-    fill(255,180);
-      text(ballsdestroyed + "/" + ballslaunched, 10,30);
-       
-      /*  explosions.drawAll();
-            explosions.checkCollisions(bolinhas);
-              bolinhas.drawAll();
-                bolinhas.cycle();
-                  explosions.cycle(); */
-        
-        bolinhas.cycle();
-          explosions.cycle();
-            explosions.checkCollisions(bolinhas);
-              explosions.drawAll();
-                bolinhas.drawAll();
-                 
-                  if ((frameCount < 201) && ((frameCount % 8)==0)) {
-                          //for (int i = 3; i > 0; i--) {
-                            bolinhas.addRandomBolinha();
-                                bolinhas.addRandomBolinha();
-                                    bolinhas.addRandomBolinha();
-                                          //}
-                                      }
-                    frameCount++;
+Bolinhas bolinhas;
+Explosions explosions;
+
+int ballslaunched = 0;
+int ballsdestroyed = 0;
+
+int frameCount=1;
+
+PFont font;
+void setup() {
+  size(320, 176);
+  //  smooth();
+  //  font = loadFont("Tahoma"); 
+  //  textFont(font, 32);
+  bolinhas = new Bolinhas();
+  explosions = new Explosions();
+  frameRate(3);
+  rectMode(CORNERS);
 }
- 
+
+void draw() {
+  //background(60,60,120);
+  //background(51);
+  fill(255,180);
+  //text(ballsdestroyed + "/" + ballslaunched, 10,30);
+
+  /*  explosions.drawAll();
+      explosions.checkCollisions(bolinhas);
+      bolinhas.drawAll();
+      bolinhas.cycle();
+      explosions.cycle(); */
+
+  bolinhas.cycle();
+  explosions.cycle();
+  explosions.checkCollisions(bolinhas);
+  explosions.drawAll();
+  bolinhas.drawAll();
+
+  if ((frameCount < 201) && ((frameCount % 8)==0)) {
+    //for (int i = 3; i > 0; i--) {
+    bolinhas.addRandomBolinha();
+    bolinhas.addRandomBolinha();
+    bolinhas.addRandomBolinha();
+    //}
+  }
+  frameCount++;
+}
+
 void mousePressed() {
     if (mouseButton == 1) {
           explosions.addExplosion(mouseX,mouseY);
