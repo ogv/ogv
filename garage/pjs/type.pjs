@@ -1,0 +1,23 @@
+size(320, 176); 
+
+// Load the font. Fonts are located within the 
+// main Processing directory/folder and they
+// must be placed within the data directory
+// of your sketch for them to load
+PFont fontA = loadFont("Arial");
+
+// Set the font and its size (in units of pixels)
+textFont(fontA, 32);
+
+int x = 30;
+
+// Use fill() to change the value or color of the text
+fill(0);
+text("We're", x, 60);
+fill(51);
+text("Processing", x, 95);
+fill(204);
+text("in", x, 130);
+fill(255);
+text("Javascript", x, 165);
+

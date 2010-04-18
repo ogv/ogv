@@ -1,0 +1,7 @@
+# Window tabs, second to last line
+caption always "%{kW}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{kW}%?%+Lw%? %= %{=b Wk}%110`%109` %{= kw}%111`"
+
+# Status string, last line
+#hardstatus string '%{+b kr}\%{= ky}o%{=b kY}/%{=b Wk} %100` %{= Wk}%112` %= %{=b bW}%102`%{= Wk} %{=b rW}%101`%{= Wk} %{= Wg}%108`%{= Wk} %{= Yk}%106`%{= Wk} %{= Wk}%104`%{=b cW}%103`%{= Wk} %{=b gW}%105`%107`%{= Wk} %Y-%m-%d %0c:%s'
+#hardstatus string "%H"
+hardstatus string "%H: %l"

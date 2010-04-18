@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+  <!-- TODO: Add manifest -->
+  <head>
+    <title>#ogv, the Open Garage Video</title>
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen, projection" />
+    
+    <script type="text/javascript" charset="utf-8" src="js/processing.min.js"></script>
+    <script type="text/javascript" charset-"utf-8" src="js/ovg.js"></script>
+  </head>
+  <body>
+    <h1 id="title">#ogv</h1>
+    <h1 id="slug">open garage video</h1>
+   
+    <div id="screen">
+      <video id="bergen_video" src="media/berg320.90min.ogv"></video>
+      <canvas id="bergen_processing_canvas" width="320" height="176">
+      </canvas>
+    </div>
+    <div id="controls">
+      <ul>controls
+        <li><a href="#" onclick="play_pause('bergen_video');">Play / Pause</a></li>
+        <li><a href="#" onclick="stop('bergen_video');">Stop</a></li>
+        <li><a href="#" onclick="volUp('bergen_video');">Volume Up</a></li>
+        <li><a href="#" onclick="volDown('bergen_video');">Volume Down</a></li>
+        <li><a href="#" onclick="mute('bergen_video');">Mute</a></li>
+        <li><a href="#" onclick="showFilter();">Filter Editor</a></li>
+      </ul>
+    </div>
+    <div id="filter" style="display:none">
+      <form name="filter_form">
+        <textarea id="filter_text" name="filter_text" wrap="off">
+ 
+        Bolinhas bolinhas;
+        Explosions explosions;
+         
+        int ballslaunched = 0;
+        int ballsdestroyed = 0;
+         
+        int frameCount=1;
+         
+        PFont font;
+        void setup() {
+            size(400, 300);
+            //  smooth();
+              font = loadFont("Tahoma"); 
+                textFont(font, 32);
+                  bolinhas = new Bolinhas();
+                    explosions = new Explosions();
+                      frameRate(3);
+                        rectMode(CORNERS);
+                          
+                          
+        }
+ 
+ 
+ 
+void draw() {
+    //background(60,60,120);
+    //background(51);
+    fill(255,180);
+      text(ballsdestroyed + "/" + ballslaunched, 10,30);
+       
+      /*  explosions.drawAll();
+            explosions.checkCollisions(bolinhas);
+              bolinhas.drawAll();
+                bolinhas.cycle();
+                  explosions.cycle(); */
+        
+        bolinhas.cycle();
+          explosions.cycle();
+            explosions.checkCollisions(bolinhas);
+              explosions.drawAll();
+                bolinhas.drawAll();
+                 
+                  if ((frameCount < 201) && ((frameCount % 8)==0)) {
+                          //for (int i = 3; i > 0; i--) {
+                            bolinhas.addRandomBolinha();
+                                bolinhas.addRandomBolinha();
+                                    bolinhas.addRandomBolinha();
+                                          //}
+                                      }
+                    frameCount++;
+}
+ 
+void mousePressed() {
+    if (mouseButton == 1) {
+          explosions.addExplosion(mouseX,mouseY);
+            } else {
+                  for (int i = 10; i > 0; i--) {
+                          bolinhas.addRandomBolinha();
+                              }
+                    }
+}
+ 
+void keyPressed() {
+    if (key == 'r' || key == 'R') {
+          ballslaunched = 0;
+              ballsdestroyed = 0;
+                  bolinhas.reset();
+                      explosions.reset();
+                          frameCount = 1;
+                            } else if (key == 'l' || key == 'L') {
+                                  //if ((mouseX > 0) && (mouseX < width) && (mouseY > 0) && (mouseY < height)) {
+                                    float speed = random(-15,-5);
+                                          float accel = 0.5*speed*speed/(height-mouseY+10);
+                                                bolinhas.addBolinha(new sParticle(mouseX, height + 10, speed, accel));
+                                                   // }
+                                                  } else if (key == 'c' || key == 'C') {
+                                                        ballslaunched = 0;
+                                                            ballsdestroyed = 0;
+                                                                bolinhas.reset();
+                                                                    explosions.reset();
+                                                                        frameCount = 201;
+                                                                          }  
+     }
+ 
+ 
+/***************/
+ 
+class Bolinhas extends ParticleSystem {
+    
+     Bolinhas() {
+           super(0);
+             }
+       
+        Bolinhas(int particlesnum) {
+              while (particlesnum-- > 0) {
+                      particles.add(new sParticle(int(random(0,width)), int(random(height+5,height+50)), random(-15,-7), random(0.1,0.4)));
+                            ballslaunched++;
+                                }
+                }
+            
+          void addRandomBolinha() {
+                float speed = random(-15,-5);
+                    float accel = 0.5*speed*speed/(random(180,420)); // altura min e max
+                        particles.add(new sParticle(int(random(0,width)), int(random(height+5,height+50)), speed, accel));
+                            ballslaunched++;
+                              }
+            
+            void addBolinha(Particle p) {
+                  particles.add(p);
+                      ballslaunched++;
+                        }
+}
+ 
+ 
+ 
+class Explosion extends Particle {
+   
+     int x;
+        int y;
+         
+           int maxradius = 90;
+              float inc = 10;
+                 float radius = 2;
+                    float biggerradius = 2;
+                     
+                      Explosion(int x, int y) {
+                            this.x = x;
+                                this.y = y;
+                                  }
+                       
+                        void update() {
+                              biggerradius += inc;
+                                  radius = constrain(biggerradius, -10, maxradius);
+                                      if (biggerradius >= 300) {
+                                              inc = -3;
+                                                    biggerradius = 90;
+                                                        }
+                                        }
+                         
+                          boolean isDead() {
+                                return (radius < 0);
+                                  }
+                            
+                            float getRadius() {
+                                  return radius;
+                                    }
+                              
+                               int getX() {
+                                     return x;
+                                       }
+                                 
+                                  int getY() {
+                                        return y;
+                                          }
+                                   
+                                    void drawSelf() {
+                                          fill(255,0,0,100);
+                                              ellipse(x,y,int(radius),int(radius));
+                                                  ellipse(x,y,int(radius*0.9),int(radius*0.9));
+                                                      ellipse(x,y,int(radius*0.8),int(radius*0.8));
+                                                          ellipse(x,y,int(radius*0.5),int(radius*0.5));
+                                                            }
+                                     
+                                     //  void kill() { }
+}
+ 
+/*********************/
+ 
+class Explosions extends ParticleSystem {
+   
+     void addExplosion(int x, int y) {
+           if (y < height + 30) {
+                   particles.add(new Explosion(x,y));
+                       }
+             }
+       
+        void checkCollisions(Bolinhas bolinhas) {
+              
+              int i = particles.size();
+                  int b;
+                      
+                      int bx,by,ex,ey;
+                          float er;
+                              Particle p;
+                                   Explosion e;
+                                       
+                                       while (i-- > 0) {
+                                               b = bolinhas.size();
+                                                     e = (Explosion) particles.get(i);
+                                                           ex = e.getX();
+                                                                 ey = e.getY();
+                                                                       er = e.getRadius() / 2;
+                                                                             while (b-- > 0) {
+                                                                                       
+                                                                                        p = (Particle) bolinhas.get(b);
+                                                                                                 bx = p.getX();
+                                                                                                          by = p.getY();
+                                                                                                                   
+                                                                                                                   
+                                                                                                           
+                                                                                                          //    if ( sqrt( (ex-bx)*(ex-bx) + (ey-by)*(ey-by)) < er ) {
+                                                                                                              if (dist(ex,ey,bx,by) < er) {
+                                                                                                                        addExplosion(bx,by);
+                                                                                                                                //  p.drawSelf();
+                                                                                                                                ballsdestroyed++;
+                                                                                                                                        bolinhas.removeParticle(b);
+                                                                                                                                                }
+                                                                                                                    }
+                                                                                 }
+                                                                               }
+                                         
+        }
+         
+        /*************/
+         
+        class ParticleSystem {
+           
+             ArrayList particles = new ArrayList();
+              
+                void cycle() {
+                    int i = particles.size();
+                        Particle p;
+                            while (i-- > 0) {
+                                    p = (Particle) particles.get(i);
+                                          p.update();
+                                                if (p.isDead()) {
+                                                          particles.remove(i);
+                                                                }
+                                                    }
+                             
+                              /*void cycle() {
+                                    var i;
+                                        Particle p;
+                                            for (i = 0; i < particles.size(); i++) {
+                                                  p = (Particle) particles.get(i);
+                                                        p.update();
+                                                              if (p.isDead()) {
+                                                                      particles.remove(i);
+                                                                            }
+                                                                                }
+                                                                                  }*/
+                             
+                              }
+                  
+                   void drawAll() {
+                         int i = particles.size();
+                             Particle p;
+                                 while (i-- > 0) {
+                                         p = (Particle)particles.get(i);
+                                               p.drawSelf();
+                                                   }
+                                   }
+                     
+                      int size() {
+                            return particles.size();
+                              }
+                        
+                         Object get(int i) {
+                               try {return particles.get(i); } catch (Exception e) { return null;}
+                                 }
+                           
+                           void addParticle(Particle p){
+                                 particles.add(p);
+                                   }
+                             
+                             void removeParticle(int i) {
+                                   particles.remove(i);
+                                     }
+                              
+                               void reset() {
+                                     particles = new ArrayList();
+                                       }  
+        }
+         
+        /****************/
+         
+         
+         
+        class Particle {
+             void update() { }
+                void drawSelf() { }
+                   boolean isDead() { }
+                      int getX() { }
+                         int getY() { }
+                           
+        }
+         
+        class sParticle extends Particle {
+            
+             int x;
+                int y;
+                   float fy;
+                      float speed;
+                         float accel;
+                            int radius = 10;//BOLINHA_RADIUS;
+                            //   boolean killed = false;
+                              
+                               //int[] oldy = new int[5];
+                              
+                              sParticle(int x, int y, float speed, float accel) {
+                                    this.x = x;
+                                        this.y = y;
+                                            this.fy = float(y);
+                                                this.speed = speed;
+                                                    this.accel = accel;
+                                                        //oldy[0]=oldy[1]=oldy[2]=oldy[3]=oldy[4]=y;
+                                                      }
+                                
+                                void update() {
+                                      fy += speed;
+                                          if (y != int(fy)) {
+                                                  y=int(fy);
+                                                        //adds new value to old pos array
+                                                        //for (int i=0;i<4;i++){
+                                                        //  oldy[i]=oldy[i+1];
+                                                        //}
+                                                        //oldy[4]=y;
+                                                      }
+                                            y=fy;
+                                                speed += accel;
+                                                  }
+                                  
+                                  boolean isDead() {
+                                    //    return (killed) || (y > height + 50);
+                                        return (this.y > height + 50) ;
+                                          }
+                                    
+                                    void drawSelf() {
+                                       
+                                          noStroke();
+                                              /*fill(255, 30);
+                                                    ellipse(x,oldy[0], radius, radius);
+                                                        fill(255, 60);
+                                                            ellipse(x,oldy[1], radius, radius);
+                                                                fill(255, 90);
+                                                                    ellipse(x,oldy[2], radius, radius);
+                                                                        fill(255, 120);
+                                                                            ellipse(x,oldy[3], radius, radius);
+                                                                                fill(255, 150);
+                                                                                    ellipse(x,oldy[4], radius, radius);*/
+                                              fill(255, 255);
+                                                  ellipse(x,y, radius, radius);
+                                                    }
+                                      
+                                       int getX() {
+                                             return x;
+                                               }
+                                         
+                                          int getY() {
+                                                return y;
+                                                  }
+                                            
+                                           /*  void kill() {
+                                                   killed = true;
+                                                     }*/
+                                            
+        }
+
+        </textarea>
+        <button id="filter_button" type="button" onclick="applyFilter();">Apply Filter<button>
+      </form>
+    </div>
+    <div id="content">
+      <ul>Load a video url:
+      </ul>
+      <ul>Load a live stream:
+      <p class="note">Temporarily Disabled</p>
+        <!-- <li><a href="#" onclick="play_stream('bergen_stream');">Bergen</a></li> -->
+        <p class="note">You want Firefox >= 3.5</p>
+        <p class="note">TODO: Create list of active streams by querying Icecast.</p>
+        <!-- <li><a href="#" onclick="play_stream('bergen_stream');">Bergen</a></li>
+        <li><a href="#" onclick="play_stream('papyromancer_stream');">Papyromancer</a></li> -->
+      </ul>
+      <ul>Available Media
+        <li><a href="http://lightcorp.net/garage/media/">Garage Floor</a></li>
+        <li><a href="http://lightcorp.net:8000/">Ogg Streams</a></li>
+      </ul>
+    </div>
+    
+    <!-- <script type="text/javascript" charset="utf-8" src="http://drop.io/openvideo_garage/remote_chat_bar.js?chat_password=e1kab9jldn"></script> -->
+  </body>
+</html>

@@ -1,0 +1,121 @@
+@font-face {
+  font-family: "Orbitron Black";
+  src: url("fonts/orbitron-black.otf");
+}
+@font-face {
+  font-family: "Goudy Bookletter 1911";
+  src: url("fonts/GoudyBookletter1911.otf");
+}
+@font-face {
+  font-family: "Miso";
+  src: url("fonts/miso.otf");
+}
+@font-face {
+  font-family: "Miso Light";
+  src: url("fonts/miso-light.otf");
+}
+
+body {
+  background-color: #000;
+  color: white;
+  font-family: "Miso Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:25px;
+}
+a {
+  color:yellow;
+  font-family: "Miso"
+}
+a:hover {
+background: rgba(0,255,255,.6);
+  -moz-border-radius:8px;
+}
+a:active {
+  color:red
+}
+h1#title {
+  font-family: "Orbitron Black", Helvetica, Arial, sans-serif;
+  font-size:64px;
+  position: fixed;
+  bottom: 10px;
+  left: 40px;
+  color:rgba(255,255,255,.2);
+}
+h1#slug {
+  font-size: 16px;
+  position: fixed;
+  bottom: 112px;
+  left: 112px;
+  display: none;
+}
+#content {
+  height: 100%;
+  background: rgba(255,255,255,.2);
+  -moz-border-radius:8px;
+  width: 192px;
+  font-size: 20px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+video {
+  height: 100%;
+  z-index: -10;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: none;
+}
+canvas#bergen_processing_canvas {
+  background: transparent;
+  z-index: -1;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+}
+#controls,
+#filter {
+  background: rgba(255,255,255,.2);
+  padding:0px;
+  margin:8px;
+  width: 128px;
+  -moz-border-radius:8px;
+  color: black;
+  font-size: 16px;
+  z-index:1;
+}
+p.note {
+  color:red;
+  font-family: "Miso", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:16px;
+}
+#filter {
+  position: fixed;
+  left: 256px;
+  width: 512px;
+  height: 80%;
+  top: 8px;
+}
+textarea#filter_text {
+  color:black;
+  background: rgba(255,255,255,.2);
+  height: 60%;
+  position: fixed;
+  width: 480px;
+  top: 24px;
+  left: 280px;
+  overflow:scroll;
+}
+button#filter_button {
+  font-family: "Miso", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 28px;
+  color:green;
+  background: rgba(255,255,255,.3);
+  position: fixed;
+  width: 128px;
+  height: 64px;
+  top:68%;
+  left: 632px;
+}

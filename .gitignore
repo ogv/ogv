@@ -1,0 +1,14 @@
+.vim/backups
+.vim/tmp
+.ssh
+.bash*
+.zcompdump
+.zhistory
+.zsh/cache
+.irssi
+.lesshst
+.profile
+
+garage/media/*
+Downloads/*
+Desktop/*
