@@ -1,3 +1,6 @@
+Example to place in media/:
+http://lightcorp.net/garage/media/berg320.30min.ogv
+
 Initiate a video stream from your webcam:
     $ ffmpeg2theora /dev/video0 -f video4linux2 -x 320 -y 240 --inputfps 10 --videobitrate 30 --audiobitrate 50 --channels 1 -o - | oggfwd lightcorp.net 8000 igrokvideo /<your mane here>.ogv -n "webcam" -d "Webcam Stream"</pre>
 
