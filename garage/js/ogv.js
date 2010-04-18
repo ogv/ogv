@@ -66,11 +66,13 @@ function mute(video) {
 }
 
 function showFilter() {
+  setStyleById("content", "display", "none");
   setStyleById("filter", "display", "inline");
 }
 
 function applyFilter() {
   setStyleById("filter", "display", "none");
+  setStyleById("content", "display", "inline");
   var script = document.filter_form.filter_text.value;
 	var canvas = document.getElementById("bergen_processing_canvas");
 	Processing(canvas, script);
