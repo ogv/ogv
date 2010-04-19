@@ -23,43 +23,38 @@
       <div id="controls">
         <!-- Marking and Sync only visible when in edit mode -->
         <p id="edit_controls">
-          <a href="#" onclick="markIn();"><img src="icons/mark-in.png"></a>
-          <a href="#" onclick="playheadSync();"><img src="icons/playhead.png"></a>
-          <a href="#" onclick="markOut();"><img src="icons/mark-out.png"></a>
+          <a href="#" onclick="ogv.edit('mark_in');"><img src="icons/mark-in.png"></a>
+          <a href="#" onclick="ogv.edit('mark_out');"><img src="icons/mark-out.png"></a>
           
         <!-- Standard video Controls -->
         <p id="playback_controls">
           <!-- A Big Play/Pause Button -->
-          <a href="#" onclick="ogv('play');"><img id="play_button" src="icons/play.png"></a>
+          <a href="#" onclick="ogv.video('play_pause');"><img id="play_button" src="icons/play.png"></a>
         </p>
 
         <!-- The Volume Row -->
         <p id="volume_controls">
-          <a href="#" onclick="volUp('bergen_video');"><img src="icons/volume-up.png"></a>
-          <a href="#" onclick="volDown('bergen_video');"><img src="icons/volume-down.png"></a>
-          <a href="#" onclick="mute('bergen_video');"><img src="icons/muted.png"></a>
+          <a href="#" onclick="ogv.volume('up');"><img src="icons/volume-up.png"></a>
+          <a href="#" onclick="ogv.volume('down');"><img src="icons/volume-down.png"></a>
+          <a href="#" onclick="ogv.volume('mute');"><img src="icons/muted.png"></a>
         </p>
 
         <!-- Mode Switches -->
         <p id="mode_controls">
           <!-- TODO: make editor layout <a href="#" onclick="mode('editor');"><img src="icons/edit.png"></a> -->
-          <a href="#" onclick="mode('show_clip_bin');"><img id="show_clip_bin" src="icons/clips.png"></a>
+          <a href="#" onclick="ogv.mode('clip_bin');"><img id="show_clip_bin" src="icons/clips.png"></a>
           <!-- TODO: Move filters into edit mode <a href="#" onclick="mode('show_filter');"><img id="show_filter" src="icons/filter.png"></a> -->
-          <a href="#" onclick="mode('show_wave');"><img id="show_wave" src="icons/wave.png"></a>
+          <a href="#" onclick="ogv.mode('wave');"><img id="show_wave" src="icons/wave.png"></a>
         </p>
       </div>
 
       <!-- Special Cases -->
       <div id="special_purpose">
 
-        <!-- The Developer's Wave -->
-        <div id="waveframe">
-        </div>
-
         <!-- For Site Credits, a prominent button -->
         <div id="meta">
           <p align="center">
-            <a href="#" onclick="showHelp();">?</a>
+            <a href="#" onclick="ogv.mode('help');">?</a>
           </p>
         </div>
       </div>
@@ -69,22 +64,33 @@
 
         <!-- The Clip Bin -->
         <div id="clip_bin">
-          <dl>Clips
-            <dt><img src="media/The_Pacific-6_0.jpg"></dt>
-            <dd>The Pacific VI</dd>
-            <dt><img src="media/berg320.30min_0.jpg"></dt>
-            <dd>Bergen 30 min.</dd>
-          </dl>
-          <dl>Streams
-            <dt>papyromancer</dd>
-            <dd>coming soon</dd>
-          </dl>
+          <p id="clips">
+            <img src="media/The_Pacific-6_0.jpg">
+            <img src="media/berg320.30min_0.jpg">
+          </p>
+          <p id="streams">
+            <img src="media/The_Pacific-6_0.jpg">
+            <img src="media/The_Pacific-6_0.jpg">
+          </p>
         </div>
 
         <!-- The Timeline -->
         <div id="timeline">
         </div>
 
+        <!-- The Developer's Wave -->
+        <div id="waveframe">
+        </div>
+
+        <!-- Credits for site development go in the help box -->
+        <div id="help">
+          <a href="http://github.com/ogv/ogv.github.com">Fork on GitHub</a></p>
+          <ul>Prototype Media
+            <li><a href="http://papyromancer.net/media/">The Cutting Room Floor</a></li>
+            <li><a href="http://papyromancer.net:8000/">Ogg Streams</a></li>
+          </ul>
+        </div>
+        
         <!-- The filter editing bank -->
         <div id="filter">
           <form name="filter_form">
@@ -112,22 +118,8 @@ text("in", x, 130);
 fill(255);
 text("Javascript", x, 165);
             </textarea>
-            <button id="filter_button" type="button" onclick="applyFilter();">Apply Filter<button>
+            <button id="filter_button" type="button" onclick="ogv.filter('apply');">Apply Filter</button>
           </form>
-        </div>
-
-        <!-- The Developer's Wave -->
-        <div id="waveframe">
-        </div>
-
-
-        <!-- Credits for site development go in the help box -->
-        <div id="help">
-          <a href="http://github.com/ogv/ogv.github.com">Fork on GitHub</a></p>
-          <ul>Prototype Media
-            <li><a href="http://papyromancer.net/media/">The Cutting Room Floor</a></li>
-            <li><a href="http://papyromancer.net:8000/">Ogg Streams</a></li>
-          </ul>
         </div>
       </div>
     </div>

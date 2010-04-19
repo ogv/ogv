@@ -48,18 +48,8 @@ h1#slug {
   left: 112px;
   display: none;
 }
-#workbench {
-  height: 100%;
-  width: 75%
-  background: rgba(255,255,255,.2);
-  -moz-border-radius:8px;
-  font-size: 20px;
-  overflow-y: scroll;
-  overflow-x: auto;
-  position: fixed;
-  top: 0px;
-  right: 0px;
-}
+
+
 #video,
 #canvas {
   height: 100%;
@@ -75,24 +65,32 @@ h1#slug {
   background: transparent;
   z-index: -1;
 }
+
+
 #workbench,
 #controls {
   background: rgba(255,255,255,.2);
   padding:8px;
-  margin:8px;
+  margin:0px;
   -moz-border-radius:8px;
   color: black;
   font-size: 16px;
   z-index:1;
+  overflow-x: auto;
+  overflow-y: auto;
 }
 #workbench {
-  width: 75%;
+  position: fixed;
+  width: 144px;
+  height: 100%;
+  top: 0px;
+  right: 0px;
 }
 #controls {
   position: fixed;
   width: 128px;
   top: 8px;
-  right: 32px;
+  right: 8px;
 }
 #controls p {
   text-align: center;
@@ -103,18 +101,34 @@ h1#slug {
   padding: 0px;
   align: center;
 }
+
+
 #meta {
   position: fixed;
   width: 64px;
   bottom: 8px;
   right: 8px;
 }
-p.note {
-  color:red;
-  font-family: "Miso", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size:16px;
+
+
+#clip_bin,
+#timeline,
+#help {
+  display: none;
 }
+
+
+#waveframe {
+  position:fixed;
+  width: 512px;
+  height: 80%;
+  right: -700px;
+  bottom: -16px;
+}
+
+
 #filter {
+  display:none;
   position: fixed;
   right: 0px;
   width: 512px;
@@ -122,6 +136,7 @@ p.note {
   top: 8px;
 }
 textarea#filter_text {
+  display:none;
   color:black;
   background: rgba(255,255,255,.2);
   height: 80%;
@@ -132,6 +147,7 @@ textarea#filter_text {
   overflow:scroll;
 }
 button#filter_button {
+  display:none;
   font-family: "Miso", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 28px;
   color:green;
@@ -142,10 +158,19 @@ button#filter_button {
   bottom: 5%;
   right: 5%;
 }
+
+
 #waveframe {
   position:fixed;
   width: 512px;
   height: 80%;
-  right: 208px;
+  right: -700px;
   bottom: -16px;
+}
+
+
+p.note {
+  color:red;
+  font-family: "Miso", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:16px;
 }
