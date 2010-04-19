@@ -24,9 +24,10 @@ body {
 a {
   color:yellow;
   font-family: "Miso"
+  decoration:none;
 }
 a:hover {
-background: rgba(0,255,255,.6);
+  background: rgba(0,255,255,.6);
   -moz-border-radius:8px;
 }
 a:active {
@@ -49,7 +50,7 @@ h1#slug {
 }
 #workbench {
   height: 100%;
-  width: 25%
+  width: 75%
   background: rgba(255,255,255,.2);
   -moz-border-radius:8px;
   font-size: 20px;
@@ -59,33 +60,25 @@ h1#slug {
   top: 0px;
   right: 0px;
 }
-video {
+#video,
+#canvas {
   height: 100%;
-  z-index: -10;
   position: fixed;
   top: 0px;
   left: 0px;
   display: none;
 }
-canvas#bergen_processing_canvas {
+#video {
+  z-index: -10;
+}
+#canvas {
   background: transparent;
   z-index: -1;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  height: 100%;
-}
-#workbench img {
-  border:none;
-  margin: 0px;
-  padding: 0px;
-  align: center;
 }
 #workbench,
 #controls {
-  position: fixed;
   background: rgba(255,255,255,.2);
-  padding:0px;
+  padding:8px;
   margin:8px;
   -moz-border-radius:8px;
   color: black;
@@ -93,12 +86,22 @@ canvas#bergen_processing_canvas {
   z-index:1;
 }
 #workbench {
-  width: 176px;
+  width: 75%;
 }
 #controls {
+  position: fixed;
   width: 128px;
   top: 8px;
   right: 32px;
+}
+#controls p {
+  text-align: center;
+}
+#controls img {
+  border:none;
+  margin: 0px;
+  padding: 0px;
+  align: center;
 }
 #meta {
   position: fixed;

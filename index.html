@@ -11,52 +11,84 @@
   </head>
   <body onload="initialize();">
     <h1 id="title">#ogv</h1>
-    <h1 id="slug">open garage video</h1>
+    <h1 id="slug">our good videos</h1>
    
     <div id="screen">
-      <video id="bergen_video" src="media/berg320.30min.ogv"></video>
-      <canvas id="bergen_processing_canvas" width="320" height="176">
+      <video id="video">
+      </video>
+      <canvas id="canvas" width="320" height="176">
       </canvas>
     </div>
     <div id="workbench">
       <div id="controls">
-        <p align="center">
-          <!-- Marking and Sync 
+        <!-- Marking and Sync only visible when in edit mode -->
+        <p id="edit_controls">
           <a href="#" onclick="markIn();"><img src="icons/mark-in.png"></a>
           <a href="#" onclick="playheadSync();"><img src="icons/playhead.png"></a>
-          <a href="#" onclick="markOut();"><img src="icons/mark-out.png"></a> -->
+          <a href="#" onclick="markOut();"><img src="icons/mark-out.png"></a>
           
+        <!-- Standard video Controls -->
+        <p id="playback_controls">
           <!-- A Big Play/Pause Button -->
-          <a href="#" onclick="play_pause('bergen_video');"><img id="play_button" src="icons/play.png"></a>
-          <a href="#" onclick="play_pause('bergen_video');"><img id="pause_button" src="icons/pause.png" style="display:none"></a>
-        
-          <!-- Mode Switches 
-          <a href="#" onclick="showEditor();"><img src="icons/edit.png"></a>
-          <a href="#" onclick="showClips();"><img src="icons/clips.png"></a> -->
-          <a href="#" onclick="showFilter();"><img id="show_filter" src="icons/filter.png"></a>
-          <a href="#" onclick="hideFilter();"><img id="hide_filter" src="icons/filter.png" style="display:none"></a>
-          <a href="#" onclick="showWave();"><img id="show_wave" src="icons/wave.png"></a>
-          <a href="#" onclick="hideWave();"><img id="hide_wave" src="icons/wave.png" style="display:none"></a>
-          
-          <br />
-          <!-- The Volume Row 
+          <a href="#" onclick="ogv('play');"><img id="play_button" src="icons/play.png"></a>
+        </p>
+
+        <!-- The Volume Row -->
+        <p id="volume_controls">
           <a href="#" onclick="volUp('bergen_video');"><img src="icons/volume-up.png"></a>
-          <a href="#" onclick="volDown('bergen_video');"><img src="icons/volume-down.png"></a> -->
+          <a href="#" onclick="volDown('bergen_video');"><img src="icons/volume-down.png"></a>
           <a href="#" onclick="mute('bergen_video');"><img src="icons/muted.png"></a>
         </p>
-      </div>
-      <div id="waveframe" style="right:-700px">
-      </div>
-      <div id="meta">
-        <p align="center">
-        <a href="http://github.com/ogv/ogv.github.com">Fork on GitHub</a></p>
-          <!-- <a href="#" onclick="showCredits();"><img src="http://papyromancer.net/favicon.png" width="48px" height="48px"></a> -->
-          
+
+        <!-- Mode Switches -->
+        <p id="mode_controls">
+          <!-- TODO: make editor layout <a href="#" onclick="mode('editor');"><img src="icons/edit.png"></a> -->
+          <a href="#" onclick="mode('show_clip_bin');"><img id="show_clip_bin" src="icons/clips.png"></a>
+          <!-- TODO: Move filters into edit mode <a href="#" onclick="mode('show_filter');"><img id="show_filter" src="icons/filter.png"></a> -->
+          <a href="#" onclick="mode('show_wave');"><img id="show_wave" src="icons/wave.png"></a>
         </p>
       </div>
-      <div id="filter" style="display:none">
-        <form name="filter_form">
-          <textarea id="filter_text" name="filter_text" wrap="off">
+
+      <!-- Special Cases -->
+      <div id="special_purpose">
+
+        <!-- The Developer's Wave -->
+        <div id="waveframe">
+        </div>
+
+        <!-- For Site Credits, a prominent button -->
+        <div id="meta">
+          <p align="center">
+            <a href="#" onclick="showHelp();">?</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Workbench Work Areas -->
+      <div id="details">
+
+        <!-- The Clip Bin -->
+        <div id="clip_bin">
+          <dl>Clips
+            <dt><img src="media/The_Pacific-6_0.jpg"></dt>
+            <dd>The Pacific VI</dd>
+            <dt><img src="media/berg320.30min_0.jpg"></dt>
+            <dd>Bergen 30 min.</dd>
+          </dl>
+          <dl>Streams
+            <dt>papyromancer</dd>
+            <dd>coming soon</dd>
+          </dl>
+        </div>
+
+        <!-- The Timeline -->
+        <div id="timeline">
+        </div>
+
+        <!-- The filter editing bank -->
+        <div id="filter">
+          <form name="filter_form">
+            <textarea id="filter_text" name="filter_text" wrap="off">
 size(320, 176); 
 
 // Load the font. Fonts are located within the 
@@ -79,28 +111,25 @@ fill(204);
 text("in", x, 130);
 fill(255);
 text("Javascript", x, 165);
-          </textarea>
-          <button id="filter_button" type="button" onclick="applyFilter();">Apply Filter<button>
-        </form>
+            </textarea>
+            <button id="filter_button" type="button" onclick="applyFilter();">Apply Filter<button>
+          </form>
+        </div>
+
+        <!-- The Developer's Wave -->
+        <div id="waveframe">
+        </div>
+
+
+        <!-- Credits for site development go in the help box -->
+        <div id="help">
+          <a href="http://github.com/ogv/ogv.github.com">Fork on GitHub</a></p>
+          <ul>Prototype Media
+            <li><a href="http://papyromancer.net/media/">The Cutting Room Floor</a></li>
+            <li><a href="http://papyromancer.net:8000/">Ogg Streams</a></li>
+          </ul>
+        </div>
       </div>
     </div>
-    <div id="help" style="display:none">
-      <ul>Load a video url:
-      </ul>
-      <ul>Load a live stream:
-      <p class="note">Temporarily Disabled</p>
-        <!-- <li><a href="#" onclick="play_stream('bergen_stream');">Bergen</a></li> -->
-        <p class="note">You want Firefox >= 3.5</p>
-        <p class="note">TODO: Create list of active streams by querying Icecast.</p>
-        <!-- <li><a href="#" onclick="play_stream('bergen_stream');">Bergen</a></li>
-        <li><a href="#" onclick="play_stream('papyromancer_stream');">Papyromancer</a></li> -->
-      </ul>
-      <ul>Available Media
-        <li><a href="http://lightcorp.net/garage/media/">Garage Floor</a></li>
-        <li><a href="http://lightcorp.net:8000/">Ogg Streams</a></li>
-      </ul>
-    </div>
-    
-    <!-- <script type="text/javascript" charset="utf-8" src="http://drop.io/openvideo_garage/remote_chat_bar.js?chat_password=e1kab9jldn"></script> -->
   </body>
 </html>

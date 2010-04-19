@@ -12,5 +12,6 @@
 
 garage/media/*
 media/*
+build/*
 Downloads/*
 Desktop/*

@@ -1,14 +1,18 @@
+// Google Wave for Development
 function initialize() {
   var wave = 
     new WavePanel('http://wave.google.com/wave/');
-    wave.loadWave('googlewave.com!w+qbzvDcFmA');
-    wave.init(document.getElementById('waveframe'));
+  wave.loadWave('googlewave.com!w+qbzvDcFmA');
+  wave.init(document.getElementById('waveframe'));
 }
 
+// Generally helpful functions
 function setStyleById(id, p, v) {
   var n = document.getElementById(id);
   n.style[p] = v;
 }
+
+// Play Controls
 
 // Play a video from the beginning
 function play_pause(id) {
@@ -28,6 +32,7 @@ function play_pause(id) {
   }
 };
 
+// Volume
 function volUp(video) {
   var vid = document.getElementById(video);
   var mute = vid.muted;
@@ -59,6 +64,21 @@ function mute(video) {
   else {
     vid.muted = true;
   }
+}
+
+// Mode Changes
+function showClipBin() {
+  setStyleById("workbench", "width", "75%");
+  setStyleById("clip_bin", "display", "inline");
+  setStyleById("show_clip_bin", "display", "none");
+  setStyleById("hide_clip_bin", "display", "inline");
+}
+
+function hideClipBin() {
+  setStyleById("workbench", "width", "176px");
+  setStyleById("clip_bin", "display", "none");
+  setStyleById("hide_clip_bin", "display", "none");
+  setStyleById("show_clip_bin", "display", "inline");
 }
 
 function showFilter() {
