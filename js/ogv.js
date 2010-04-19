@@ -1,3 +1,10 @@
+function initialize() {
+  var wave = 
+    new WavePanel('http://wave.google.com/wave/');
+    wave.loadWave('googlewave.com!w+qbzvDcFmA');
+    wave.init(document.getElementById('waveframe'));
+}
+
 function setStyleById(id, p, v) {
   var n = document.getElementById(id);
   n.style[p] = v;
@@ -57,11 +64,32 @@ function mute(video) {
 function showFilter() {
   setStyleById("workbench", "width", "75%");
   setStyleById("filter", "display", "inline");
+  setStyleById("hide_filter", "display", "inline");
+  setStyleById("show_filter", "display", "none");
 }
 
-function applyFilter() {
-  setStyleById("workbench", "width", "25%");
+function hideFilter() {
+  setStyleById("workbench", "width", "176px");
   setStyleById("filter", "display", "none");
+  setStyleById("hide_filter", "display", "none");
+  setStyleById("show_filter", "display", "inline");
+}
+
+function showWave() {
+  setStyleById("waveframe", "right", "208px");
+  setStyleById("hide_wave", "display", "inline");
+  setStyleById("show_wave", "display", "none");
+}
+
+function hideWave() {
+  setStyleById("waveframe", "right", "-700px");
+  setStyleById("hide_wave", "display", "none");
+  setStyleById("show_wave", "display", "inline");
+}
+
+
+function applyFilter() {
+  hideFilter();
   var script = document.filter_form.filter_text.value;
 	var canvas = document.getElementById("bergen_processing_canvas");
 	Processing(canvas, script);

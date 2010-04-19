@@ -139,3 +139,10 @@ button#filter_button {
   bottom: 5%;
   right: 5%;
 }
+#waveframe {
+  position:fixed;
+  width: 512px;
+  height: 80%;
+  right: 208px;
+  bottom: -16px;
+}

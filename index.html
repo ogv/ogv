@@ -5,10 +5,11 @@
     <title>#ogv, the Open Garage Video</title>
     <link rel="stylesheet" href="style.css" type="text/css" media="screen, projection" />
     
+    <script src="http://wave-api.appspot.com/public/embed.js" type="text/javascript"></script>
     <script type="text/javascript" charset="utf-8" src="js/processing.min.js"></script>
     <script type="text/javascript" charset-"utf-8" src="js/ogv.js"></script>
   </head>
-  <body>
+  <body onload="initialize();">
     <h1 id="title">#ogv</h1>
     <h1 id="slug">open garage video</h1>
    
@@ -32,19 +33,23 @@
           <!-- Mode Switches 
           <a href="#" onclick="showEditor();"><img src="icons/edit.png"></a>
           <a href="#" onclick="showClips();"><img src="icons/clips.png"></a> -->
-          <a href="#" onclick="showFilter();"><img src="icons/filter.png"></a>
+          <a href="#" onclick="showFilter();"><img id="show_filter" src="icons/filter.png"></a>
+          <a href="#" onclick="hideFilter();"><img id="hide_filter" src="icons/filter.png" style="display:none"></a>
+          <a href="#" onclick="showWave();"><img id="show_wave" src="icons/wave.png"></a>
+          <a href="#" onclick="hideWave();"><img id="hide_wave" src="icons/wave.png" style="display:none"></a>
           
           <br />
           <!-- The Volume Row 
           <a href="#" onclick="volUp('bergen_video');"><img src="icons/volume-up.png"></a>
           <a href="#" onclick="volDown('bergen_video');"><img src="icons/volume-down.png"></a> -->
           <a href="#" onclick="mute('bergen_video');"><img src="icons/muted.png"></a>
-        
-
         </p>
+      </div>
+      <div id="waveframe" style="right:-700px">
       </div>
       <div id="meta">
         <p align="center">
+        <a href="http://github.com/ogv/ogv.github.com">Fork on GitHub</a></p>
           <!-- <a href="#" onclick="showCredits();"><img src="http://papyromancer.net/favicon.png" width="48px" height="48px"></a> -->
           
         </p>
@@ -52,360 +57,28 @@
       <div id="filter" style="display:none">
         <form name="filter_form">
           <textarea id="filter_text" name="filter_text" wrap="off">
-Bolinhas bolinhas;
-Explosions explosions;
+size(320, 176); 
 
-int ballslaunched = 0;
-int ballsdestroyed = 0;
+// Load the font. Fonts are located within the 
+// main Processing directory/folder and they
+// must be placed within the data directory
+// of your sketch for them to load
+PFont fontA = loadFont("Arial");
 
-int frameCount=1;
+// Set the font and its size (in units of pixels)
+textFont(fontA, 32);
 
-PFont font;
-void setup() {
-  size(320, 176);
-  //  smooth();
-  //  font = loadFont("Tahoma"); 
-  //  textFont(font, 32);
-  bolinhas = new Bolinhas();
-  explosions = new Explosions();
-  frameRate(300);
-  rectMode(CORNERS);
-}
+int x = 30;
 
-void draw() {
-  //background(60,60,120);
-  //background(51);
-  fill(255,180);
-  //text(ballsdestroyed + "/" + ballslaunched, 10,30);
-
-  /*  explosions.drawAll();
-      explosions.checkCollisions(bolinhas);
-      bolinhas.drawAll();
-      bolinhas.cycle();
-      explosions.cycle(); */
-
-  bolinhas.cycle();
-  explosions.cycle();
-  explosions.checkCollisions(bolinhas);
-  explosions.drawAll();
-  bolinhas.drawAll();
-
-  if ((frameCount < 201) && ((frameCount % 8)==0)) {
-    //for (int i = 3; i > 0; i--) {
-    bolinhas.addRandomBolinha();
-    bolinhas.addRandomBolinha();
-    bolinhas.addRandomBolinha();
-    //}
-  }
-  frameCount++;
-}
-
-void mousePressed() {
-    if (mouseButton == 1) {
-          explosions.addExplosion(mouseX,mouseY);
-            } else {
-                  for (int i = 10; i > 0; i--) {
-                          bolinhas.addRandomBolinha();
-                              }
-                    }
-}
- 
-void keyPressed() {
-    if (key == 'r' || key == 'R') {
-          ballslaunched = 0;
-              ballsdestroyed = 0;
-                  bolinhas.reset();
-                      explosions.reset();
-                          frameCount = 1;
-                            } else if (key == 'l' || key == 'L') {
-                                  //if ((mouseX > 0) && (mouseX < width) && (mouseY > 0) && (mouseY < height)) {
-                                    float speed = random(-15,-5);
-                                          float accel = 0.5*speed*speed/(height-mouseY+10);
-                                                bolinhas.addBolinha(new sParticle(mouseX, height + 10, speed, accel));
-                                                   // }
-                                                  } else if (key == 'c' || key == 'C') {
-                                                        ballslaunched = 0;
-                                                            ballsdestroyed = 0;
-                                                                bolinhas.reset();
-                                                                    explosions.reset();
-                                                                        frameCount = 201;
-                                                                          }  
-     }
- 
- 
-/***************/
- 
-class Bolinhas extends ParticleSystem {
-    
-     Bolinhas() {
-           super(0);
-             }
-       
-        Bolinhas(int particlesnum) {
-              while (particlesnum-- > 0) {
-                      particles.add(new sParticle(int(random(0,width)), int(random(height+5,height+50)), random(-15,-7), random(0.1,0.4)));
-                            ballslaunched++;
-                                }
-                }
-            
-          void addRandomBolinha() {
-                float speed = random(-15,-5);
-                    float accel = 0.5*speed*speed/(random(180,420)); // altura min e max
-                        particles.add(new sParticle(int(random(0,width)), int(random(height+5,height+50)), speed, accel));
-                            ballslaunched++;
-                              }
-            
-            void addBolinha(Particle p) {
-                  particles.add(p);
-                      ballslaunched++;
-                        }
-}
- 
- 
- 
-class Explosion extends Particle {
-   
-     int x;
-        int y;
-         
-           int maxradius = 90;
-              float inc = 10;
-                 float radius = 2;
-                    float biggerradius = 2;
-                     
-                      Explosion(int x, int y) {
-                            this.x = x;
-                                this.y = y;
-                                  }
-                       
-                        void update() {
-                              biggerradius += inc;
-                                  radius = constrain(biggerradius, -10, maxradius);
-                                      if (biggerradius >= 300) {
-                                              inc = -3;
-                                                    biggerradius = 90;
-                                                        }
-                                        }
-                         
-                          boolean isDead() {
-                                return (radius < 0);
-                                  }
-                            
-                            float getRadius() {
-                                  return radius;
-                                    }
-                              
-                               int getX() {
-                                     return x;
-                                       }
-                                 
-                                  int getY() {
-                                        return y;
-                                          }
-                                   
-                                    void drawSelf() {
-                                          fill(255,0,0,100);
-                                              ellipse(x,y,int(radius),int(radius));
-                                                  ellipse(x,y,int(radius*0.9),int(radius*0.9));
-                                                      ellipse(x,y,int(radius*0.8),int(radius*0.8));
-                                                          ellipse(x,y,int(radius*0.5),int(radius*0.5));
-                                                            }
-                                     
-                                     //  void kill() { }
-}
- 
-/*********************/
- 
-class Explosions extends ParticleSystem {
-   
-     void addExplosion(int x, int y) {
-           if (y < height + 30) {
-                   particles.add(new Explosion(x,y));
-                       }
-             }
-       
-        void checkCollisions(Bolinhas bolinhas) {
-              
-              int i = particles.size();
-                  int b;
-                      
-                      int bx,by,ex,ey;
-                          float er;
-                              Particle p;
-                                   Explosion e;
-                                       
-                                       while (i-- > 0) {
-                                               b = bolinhas.size();
-                                                     e = (Explosion) particles.get(i);
-                                                           ex = e.getX();
-                                                                 ey = e.getY();
-                                                                       er = e.getRadius() / 2;
-                                                                             while (b-- > 0) {
-                                                                                       
-                                                                                        p = (Particle) bolinhas.get(b);
-                                                                                                 bx = p.getX();
-                                                                                                          by = p.getY();
-                                                                                                                   
-                                                                                                                   
-                                                                                                           
-                                                                                                          //    if ( sqrt( (ex-bx)*(ex-bx) + (ey-by)*(ey-by)) < er ) {
-                                                                                                              if (dist(ex,ey,bx,by) < er) {
-                                                                                                                        addExplosion(bx,by);
-                                                                                                                                //  p.drawSelf();
-                                                                                                                                ballsdestroyed++;
-                                                                                                                                        bolinhas.removeParticle(b);
-                                                                                                                                                }
-                                                                                                                    }
-                                                                                 }
-                                                                               }
-                                         
-        }
-         
-        /*************/
-         
-        class ParticleSystem {
-           
-             ArrayList particles = new ArrayList();
-              
-                void cycle() {
-                    int i = particles.size();
-                        Particle p;
-                            while (i-- > 0) {
-                                    p = (Particle) particles.get(i);
-                                          p.update();
-                                                if (p.isDead()) {
-                                                          particles.remove(i);
-                                                                }
-                                                    }
-                             
-                              /*void cycle() {
-                                    var i;
-                                        Particle p;
-                                            for (i = 0; i < particles.size(); i++) {
-                                                  p = (Particle) particles.get(i);
-                                                        p.update();
-                                                              if (p.isDead()) {
-                                                                      particles.remove(i);
-                                                                            }
-                                                                                }
-                                                                                  }*/
-                             
-                              }
-                  
-                   void drawAll() {
-                         int i = particles.size();
-                             Particle p;
-                                 while (i-- > 0) {
-                                         p = (Particle)particles.get(i);
-                                               p.drawSelf();
-                                                   }
-                                   }
-                     
-                      int size() {
-                            return particles.size();
-                              }
-                        
-                         Object get(int i) {
-                               try {return particles.get(i); } catch (Exception e) { return null;}
-                                 }
-                           
-                           void addParticle(Particle p){
-                                 particles.add(p);
-                                   }
-                             
-                             void removeParticle(int i) {
-                                   particles.remove(i);
-                                     }
-                              
-                               void reset() {
-                                     particles = new ArrayList();
-                                       }  
-        }
-         
-        /****************/
-         
-         
-         
-        class Particle {
-             void update() { }
-                void drawSelf() { }
-                   boolean isDead() { }
-                      int getX() { }
-                         int getY() { }
-                           
-        }
-         
-        class sParticle extends Particle {
-            
-             int x;
-                int y;
-                   float fy;
-                      float speed;
-                         float accel;
-                            int radius = 10;//BOLINHA_RADIUS;
-                            //   boolean killed = false;
-                              
-                               //int[] oldy = new int[5];
-                              
-                              sParticle(int x, int y, float speed, float accel) {
-                                    this.x = x;
-                                        this.y = y;
-                                            this.fy = float(y);
-                                                this.speed = speed;
-                                                    this.accel = accel;
-                                                        //oldy[0]=oldy[1]=oldy[2]=oldy[3]=oldy[4]=y;
-                                                      }
-                                
-                                void update() {
-                                      fy += speed;
-                                          if (y != int(fy)) {
-                                                  y=int(fy);
-                                                        //adds new value to old pos array
-                                                        //for (int i=0;i<4;i++){
-                                                        //  oldy[i]=oldy[i+1];
-                                                        //}
-                                                        //oldy[4]=y;
-                                                      }
-                                            y=fy;
-                                                speed += accel;
-                                                  }
-                                  
-                                  boolean isDead() {
-                                    //    return (killed) || (y > height + 50);
-                                        return (this.y > height + 50) ;
-                                          }
-                                    
-                                    void drawSelf() {
-                                       
-                                          noStroke();
-                                              /*fill(255, 30);
-                                                    ellipse(x,oldy[0], radius, radius);
-                                                        fill(255, 60);
-                                                            ellipse(x,oldy[1], radius, radius);
-                                                                fill(255, 90);
-                                                                    ellipse(x,oldy[2], radius, radius);
-                                                                        fill(255, 120);
-                                                                            ellipse(x,oldy[3], radius, radius);
-                                                                                fill(255, 150);
-                                                                                    ellipse(x,oldy[4], radius, radius);*/
-                                              fill(255, 255);
-                                                  ellipse(x,y, radius, radius);
-                                                    }
-                                      
-                                       int getX() {
-                                             return x;
-                                               }
-                                         
-                                          int getY() {
-                                                return y;
-                                                  }
-                                            
-                                           /*  void kill() {
-                                                   killed = true;
-                                                     }*/
-                                            
-        }
-
+// Use fill() to change the value or color of the text
+fill(0);
+text("We're", x, 60);
+fill(51);
+text("Processing", x, 95);
+fill(204);
+text("in", x, 130);
+fill(255);
+text("Javascript", x, 165);
           </textarea>
           <button id="filter_button" type="button" onclick="applyFilter();">Apply Filter<button>
         </form>
@@ -426,11 +99,6 @@ class Explosions extends ParticleSystem {
         <li><a href="http://lightcorp.net/garage/media/">Garage Floor</a></li>
         <li><a href="http://lightcorp.net:8000/">Ogg Streams</a></li>
       </ul>
-    </div>
-    <div id="credits" style="display:none">
-      <div id="fork">
-        <p><a href="http://github.com/ogv/ogv.github.com">Fork on GitHub</a></p>
-      </div>
     </div>
     
     <!-- <script type="text/javascript" charset="utf-8" src="http://drop.io/openvideo_garage/remote_chat_bar.js?chat_password=e1kab9jldn"></script> -->
