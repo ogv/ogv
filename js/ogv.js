@@ -1,7 +1,7 @@
 // Initialization on document ready
 $(document).ready(function(){
   modeInit();
-  loadWave();
+  //loadWave();
 });
 
 
@@ -55,12 +55,7 @@ function play_pause(id) {
   $('video#video').css('display','inline');
   $('img#play_button').css('display','none');
   $('img#pause_button').css('display','inline');
-  }
-  else {
-    video.pause();
-  $('img#pause_button').css('display','none');
-  $('img#play_button').css('display','inline');
-  }
+  $('video#video').play;
 };
 
 // Volume
