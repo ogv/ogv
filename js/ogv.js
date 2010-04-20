@@ -1,15 +1,47 @@
-// Google Wave for Development
-function initialize() {
-  var wave = 
+// Initialization on document ready
+$(document).ready(function(){
+  modeInit();
+  //loadWave();
+});
+
+
+// Load up the development Wave.
+// (should be called after document is ready)
+// Uncomment from the init block to enable
+// or fire "loadWave;" in your console.
+function loadWave() {
+  var wave =
     new WavePanel('http://wave.google.com/wave/');
+  wave.setUIConfig('transparent', '#000', 'Trebuchet MS', '12pts');
   wave.loadWave('googlewave.com!w+qbzvDcFmA');
   wave.init(document.getElementById('waveframe'));
+  $('img#wave_button').css('display','inline');
 }
 
-// Generally helpful functions
-function setStyleById(id, p, v) {
-  var n = document.getElementById(id);
-  n.style[p] = v;
+// Mode Changes
+function modeInit() {
+  var wave = false;
+  var timeline = false;
+  var filter = false;
+  var clip = false;
+
+  $('a#wave_button').click(function(event){
+    if (wave == false) {
+      $('div#waveframe').css('right','208px');
+      wave = true
+    } else {
+      $('div#waveframe').css('right','-1000px');
+    }
+  });
+
+  $('a#clip_button').click(function(event){
+    if (clip == false) {
+      alert('false');
+      clip = true;
+    } else {
+      alert('true');
+    }
+  });
 }
 
 // Play Controls
@@ -64,53 +96,4 @@ function mute(video) {
   else {
     vid.muted = true;
   }
-}
-
-// Mode Changes
-function showClipBin() {
-  setStyleById("workbench", "width", "75%");
-  setStyleById("clip_bin", "display", "inline");
-  setStyleById("show_clip_bin", "display", "none");
-  setStyleById("hide_clip_bin", "display", "inline");
-}
-
-function hideClipBin() {
-  setStyleById("workbench", "width", "176px");
-  setStyleById("clip_bin", "display", "none");
-  setStyleById("hide_clip_bin", "display", "none");
-  setStyleById("show_clip_bin", "display", "inline");
-}
-
-function showFilter() {
-  setStyleById("workbench", "width", "75%");
-  setStyleById("filter", "display", "inline");
-  setStyleById("hide_filter", "display", "inline");
-  setStyleById("show_filter", "display", "none");
-}
-
-function hideFilter() {
-  setStyleById("workbench", "width", "176px");
-  setStyleById("filter", "display", "none");
-  setStyleById("hide_filter", "display", "none");
-  setStyleById("show_filter", "display", "inline");
-}
-
-function showWave() {
-  setStyleById("waveframe", "right", "208px");
-  setStyleById("hide_wave", "display", "inline");
-  setStyleById("show_wave", "display", "none");
-}
-
-function hideWave() {
-  setStyleById("waveframe", "right", "-700px");
-  setStyleById("hide_wave", "display", "none");
-  setStyleById("show_wave", "display", "inline");
-}
-
-
-function applyFilter() {
-  hideFilter();
-  var script = document.filter_form.filter_text.value;
-	var canvas = document.getElementById("bergen_processing_canvas");
-	Processing(canvas, script);
 }

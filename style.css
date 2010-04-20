@@ -118,15 +118,6 @@ h1#slug {
 }
 
 
-#waveframe {
-  position:fixed;
-  width: 512px;
-  height: 80%;
-  right: -700px;
-  bottom: -16px;
-}
-
-
 #filter {
   display:none;
   position: fixed;
@@ -164,10 +155,12 @@ button#filter_button {
   position:fixed;
   width: 512px;
   height: 80%;
-  right: -700px;
+  right: -1000px;
   bottom: -16px;
 }
-
+img#wave_button {
+  display:none;
+}
 
 p.note {
   color:red;

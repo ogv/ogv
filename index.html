@@ -2,16 +2,17 @@
 <html>
   <!-- TODO: Add manifest -->
   <head>
-    <title>#ogv, the Open Garage Video</title>
+    <title>#ogv is good video</title>
     <link rel="stylesheet" href="style.css" type="text/css" media="screen, projection" />
     
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
     <script src="http://wave-api.appspot.com/public/embed.js" type="text/javascript"></script>
     <script type="text/javascript" charset="utf-8" src="js/processing.min.js"></script>
-    <script type="text/javascript" charset-"utf-8" src="js/ogv.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/ogv.js"></script>
   </head>
-  <body onload="initialize();">
+  <body>
     <h1 id="title">#ogv</h1>
-    <h1 id="slug">our good videos</h1>
+    <h1 id="slug">#ogv is good video</h1>
    
     <div id="screen">
       <video id="video">
@@ -42,9 +43,9 @@
         <!-- Mode Switches -->
         <p id="mode_controls">
           <!-- TODO: make editor layout <a href="#" onclick="mode('editor');"><img src="icons/edit.png"></a> -->
-          <a href="#" onclick="ogv.mode('clip_bin');"><img id="show_clip_bin" src="icons/clips.png"></a>
+          <a href="#" id="clip_button"><img id="clip_button" src="icons/clips.png"></a>
           <!-- TODO: Move filters into edit mode <a href="#" onclick="mode('show_filter');"><img id="show_filter" src="icons/filter.png"></a> -->
-          <a href="#" onclick="ogv.mode('wave');"><img id="show_wave" src="icons/wave.png"></a>
+          <a href="#" id="wave_button"><img id="wave_button" src="icons/wave.png"></a>
         </p>
       </div>
 
