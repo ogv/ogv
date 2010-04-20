@@ -52,6 +52,7 @@ h1#slug {
   left: 112px;
   display: none;
 }
+#pause_button,
 #screen{
   display:none;
 }

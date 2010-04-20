@@ -54,8 +54,8 @@ function modeInit() {
     if (paused) {
       var video = document.getElementById('video');
       video.play();
-      $('img#play_button').css('display','none');
-      $('img#pause_button').css('display','inline');
+      $('img#play_button').hide();
+      $('img#pause_button').show();
       paused = false;
     } else {
       var video = document.getElementById('video');
@@ -71,6 +71,11 @@ function modeInit() {
     $('#screen').show('slow');
     play_pause();
   });
+  
+  $('a#pause_button').click(function(event){
+    play_pause();
+  });
+
 
 }
 // Volume
