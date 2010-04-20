@@ -53,11 +53,6 @@ function modeInit() {
 // Play a video from the beginning
 function play_pause(id) {
   $('video#video').css('display','inline');
-  var video = document.getElementById(id);
-  if (video.paused) {
-    var time = video.currentTime
-    video.currentTime = time;
-    video.play();
   $('img#play_button').css('display','none');
   $('img#pause_button').css('display','inline');
   }
