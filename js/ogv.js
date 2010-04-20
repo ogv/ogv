@@ -1,7 +1,7 @@
 // Initialization on document ready
 $(document).ready(function(){
   modeInit();
-  //loadWave();
+  loadWave();
 });
 
 
@@ -27,10 +27,12 @@ function modeInit() {
 
   $('a#wave_button').click(function(event){
     if (wave == false) {
-      $('div#waveframe').css('right','208px');
+      $('div#github-commit-badge-container').show('slow');
+      $('div#waveframe').css('right','144px');
       wave = true;
     } else {
       $('div#waveframe').css('right','-1000px');
+      $('div#github-commit-badge-container').hide;
       wave = false;
     }
   });
@@ -46,18 +48,31 @@ function modeInit() {
       clip_bin = false;
     }
   });
+
+  // Play Controls
+  function play_pause() {
+    if (paused) {
+      var video = document.getElementById('video');
+      video.play();
+      $('img#play_button').css('display','none');
+      $('img#pause_button').css('display','inline');
+      paused = false;
+    } else {
+      var video = document.getElementById('video');
+      video.pause();
+      $('img#pause_button').css('display','none');
+      $('img#play_button').css('display','inline');
+      paused = true;
+    }
+  };
+  
+  var paused = true;
+  $('a#play_pause_button').click(function(event){
+    $('#screen').show('slow');
+    play_pause();
+  });
+
 }
-
-// Play Controls
-
-// Play a video from the beginning
-function play_pause(id) {
-  $('video#video').css('display','inline');
-  $('img#play_button').css('display','none');
-  $('img#pause_button').css('display','inline');
-  $('video#video').play;
-};
-
 // Volume
 function volUp(video) {
   var vid = document.getElementById(video);

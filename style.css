@@ -52,15 +52,15 @@ h1#slug {
   left: 112px;
   display: none;
 }
-
-
-#video,
-#canvas {
+#screen{
+  display:none;
+}
+video,
+canvas {
   height: 100%;
   position: fixed;
   top: 0px;
   left: 0px;
-  display: none;
 }
 #video {
   z-index: -10;
@@ -165,13 +165,19 @@ button#filter_button {
 
 #waveframe {
   position:fixed;
-  width: 512px;
-  height: 80%;
+  width: 720px;
+  height: 60%;
   right: -1000px;
-  bottom: -16px;
+  top: -16px;
+}
+#github-commit-badge-container {
+  position:fixed;
+  width: 512px;
+  right: 176px;
+  bottom: 0px;
+  display: none;
 }
 img#wave_button {
-  display:none;
 }
 
 p.note {
