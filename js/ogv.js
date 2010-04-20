@@ -32,7 +32,7 @@ function modeInit() {
       wave = true;
     } else {
       $('div#waveframe').css('right','-1000px');
-      $('div#github-commit-badge-container').hide;
+      $('div#github-commit-badge-container').hide();
       wave = false;
     }
   });
