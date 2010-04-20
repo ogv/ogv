@@ -1,7 +1,7 @@
 // Initialization on document ready
 $(document).ready(function(){
   modeInit();
-//  loadWave();
+  loadWave();
 });
 
 
