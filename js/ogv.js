@@ -1,7 +1,7 @@
 // Initialization on document ready
 $(document).ready(function(){
   modeInit();
-  //loadWave();
+//  loadWave();
 });
 
 
@@ -23,23 +23,27 @@ function modeInit() {
   var wave = false;
   var timeline = false;
   var filter = false;
-  var clip = false;
+  var clip_bin = false;
 
   $('a#wave_button').click(function(event){
     if (wave == false) {
       $('div#waveframe').css('right','208px');
-      wave = true
+      wave = true;
     } else {
       $('div#waveframe').css('right','-1000px');
+      wave = false;
     }
   });
 
   $('a#clip_button').click(function(event){
-    if (clip == false) {
-      alert('false');
-      clip = true;
+    if (clip_bin == false) {
+      $('div#workbench').css('width','75%');
+      $('div#clip_bin').css('display','inline');
+      clip_bin = true;
     } else {
-      alert('true');
+      $('div#clip_bin').css('display','none');
+      $('div#workbench').css('width','144px');
+      clip_bin = false;
     }
   });
 }
@@ -48,19 +52,19 @@ function modeInit() {
 
 // Play a video from the beginning
 function play_pause(id) {
-  setStyleById(id, "display", "inline");
+  $('video#video').css('display','inline');
   var video = document.getElementById(id);
   if (video.paused) {
     var time = video.currentTime
     video.currentTime = time;
     video.play();
-    setStyleById("play_button", "display", "none");
-    setStyleById("pause_button", "display", "inline");
+  $('img#play_button').css('display','none');
+  $('img#pause_button').css('display','inline');
   }
   else {
     video.pause();
-    setStyleById("pause_button", "display", "none");
-    setStyleById("play_button", "display", "inline");
+  $('img#pause_button').css('display','none');
+  $('img#play_button').css('display','inline');
   }
 };
 
