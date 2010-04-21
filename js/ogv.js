@@ -1,7 +1,7 @@
 // Initialization on document ready
 $(document).ready(function(){
   modeInit();
-  loadWave();
+  //loadWave();
 });
 
 
@@ -17,6 +17,21 @@ function loadWave() {
   wave.init(document.getElementById('waveframe'));
   $('img#wave_button').css('display','inline');
 }
+
+// sammy.js
+
+var app =  $.sammy(function() {
+
+        this.get('#/create', function() {
+      $('div#filter').show('slow');
+          
+          });
+
+        });
+
+$(function() {
+      app.run();
+      });
 
 // Mode Changes
 function modeInit() {

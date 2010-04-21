@@ -140,7 +140,6 @@ right: 32px;
   top: 8px;
 }
 textarea#filter_text {
-  display:none;
   color:black;
   background: rgba(255,255,255,.2);
   height: 80%;
@@ -151,7 +150,6 @@ textarea#filter_text {
   overflow:scroll;
 }
 button#filter_button {
-  display:none;
   font-family: "Miso", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 28px;
   color:green;
