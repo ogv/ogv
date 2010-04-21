@@ -39,7 +39,7 @@
 
           <!-- TODO: make editor layout <a href="#" onclick="mode('editor');"><img src="icons/edit.png"></a> -->
           <!-- TODO: make clips clickable so that they load in the player <a href="#" id="clip_button"><img id="clip_button" src="icons/clips.png"></a> -->
-          <!-- TODO: reapply filter tech <a href="#" id="filter_button"><img id="filter_button" src="icons/filter.png"></a> -->
+          <a href="#" id="filter_button"><img id="filter_button" src="icons/filter.png"></a>
           <a href="#" id="wave_button"><img id="wave_button" src="icons/wave.png"></a>
         </p>
 
@@ -130,7 +130,7 @@ text("in", x, 130);
 fill(255);
 text("Javascript", x, 165);
             </textarea>
-            <button id="filter_button" type="button" onclick="ogv.filter('apply');">Apply Filter</button>
+            <button id="filter_apply" onclick="applyFilter();" type="submit">Apply Filter</button>
           </form>
         </div>
       </div>

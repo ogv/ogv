@@ -149,11 +149,11 @@ textarea#filter_text {
   right: 20%;
   overflow:scroll;
 }
-button#filter_button {
-  font-family: "Miso", "Helvetica Neue", Helvetica, Arial, sans-serif;
+button#filter_apply {
+font-family: "Miso", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 28px;
-  color:green;
-  background: rgba(255,255,255,.3);
+  color:white;
+  background: rgba(0,0,0,.6);
   position: fixed;
   width: 10%;
   height: 64px;
