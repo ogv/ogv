@@ -53,12 +53,10 @@ function modeInit() {
 
   $('a#wave_button').click(function(event){
     if (wave == false) {
-      $('div#github-commit-badge-container').show('slow');
       $('div#waveframe').css('right','144px');
       wave = true;
     } else {
       $('div#waveframe').css('right','-1000px');
-      $('div#github-commit-badge-container').hide();
       wave = false;
     }
   });

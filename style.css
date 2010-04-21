@@ -164,18 +164,12 @@ font-family: "Miso", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 #waveframe {
   position:fixed;
-  width: 720px;
-  height: 60%;
+  width: 640px;
+  height: 80%;
   right: -1000px;
   top: -16px;
 }
-#github-commit-badge-container {
-  position:fixed;
-  width: 512px;
-  right: 176px;
-  bottom: 0px;
-  display: none;
-}
+
 img#wave_button {
 }
 
