@@ -1,3 +1,0 @@
-[submodule "js/github-commit-badge"]
-	path = js/github-commit-badge
-	url = git://github.com/heipei/github-commit-badge
