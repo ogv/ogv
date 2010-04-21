@@ -36,7 +36,8 @@ function loadWave() {
 $(function() { app.run(); });
 
 var app =  $.sammy(function() {
- this.get('#/create', function() {
+  var prefix = "";
+  this.get('#' + prefix + 'create', function() {
     $('div#license').hide();
     $('div#workbench').css('width','75%');
     $('div#filter').show('slow');
