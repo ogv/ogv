@@ -3,7 +3,8 @@
   function applyFilter() {
     $('div#filter').hide();
     $('div#workbench').css('width','160px');
-    $('div#license').show('slow');
+    $('div#license').show();
+    $('#screen').show('slow');
     var script = document.filter_form.filter_text.value;
     var canvas = document.getElementById("canvas");
     Processing(canvas, script);
@@ -12,7 +13,7 @@
 // Initialization on document ready
 $(document).ready(function(){
   modeInit();
-  loadWave();
+  //loadWave(); // I recommend commenting this during non-wave development
 
 
 });
